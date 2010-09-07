@@ -1,0 +1,11 @@
+--- build.sh~	2010-08-07 11:51:22.000000000 +0200
++++ build.sh	2010-08-07 13:08:26.000000000 +0200
+@@ -20,7 +20,7 @@
+ 
+ mkdir -p build
+ javac -encoding "ISO-8859-1" -deprecation -O -g:none -classpath $(build-classpath commons-net jakarta-oro) -d build @sources.lst
+-cp ./resources/* ./build
++cp -r htmls ./resources/* ./build
+ jar cfvm ProjectX.jar MANIFEST.MF -C build .
+ 
+ ######################################################
