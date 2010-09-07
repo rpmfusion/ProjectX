@@ -1,0 +1,19 @@
+--- projectx.desktop~	2005-09-10 18:03:04.000000000 +0200
++++ projectx.desktop	2010-08-06 23:05:50.000000000 +0200
+@@ -1,10 +1,13 @@
+ [Desktop Entry]
++Version=1.0
+ X-SuSE-translate=true
+-Categories=AudioVideo;AudioVideoEditing
++Categories=AudioVideo;AudioVideoEditing;
+ Comment=A video editing and demultiplexing tool
++Comment[sv]=Ett videoredigerings- och demultiplexningsverktyg
+ Encoding=UTF-8
+-Exec=java -jar /usr/share/projectx/ProjectX.jar
+-GenericName=ProjectX
++Exec=/usr/bin/projectx
++GenericName=DVB file manager
++GenericName[sv]=DVB-filhanterare
+ Icon=package_multimedia
+ Name=ProjectX
+ Name[de]=ProjectX

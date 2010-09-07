@@ -1,0 +1,11 @@
+--- build.sh~	2007-01-25 21:06:14.000000000 +0100
++++ build.sh	2009-12-01 14:27:48.000000000 +0100
+@@ -19,7 +19,7 @@
+ fi
+ 
+ mkdir -p build
+-javac -encoding "ISO-8859-1" -deprecation -O -g:none -classpath lib/commons-net-1.3.0.jar:lib/jakarta-oro-2.0.8.jar -d build @sources.lst
++javac -encoding "ISO-8859-1" -deprecation -O -g:none -classpath $(build-classpath commons-net jakarta-oro) -d build @sources.lst
+ cp ./resources/* ./build
+ jar cfvm ProjectX.jar MANIFEST.MF -C build .
+ 
