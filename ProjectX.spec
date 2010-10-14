@@ -3,7 +3,7 @@
 
 Name: ProjectX
 Version: 0.90.4.00
-Release: 7.%cvs%{?dist}
+Release: 8.%cvs%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -110,6 +110,9 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %changelog
+* Fri Oct 15 2010 Nicolas Chauvet <kwizart@gmail.com> - 0.90.4.00-8.20100806cvs
+- Rebuilt for gcc bug
+
 * Tue Aug 10 2010 Göran Uddeborg <goeran@uddeborg.se> 0.90.4.00-7.20100806cvs
 - Remove the requirement on Java 1.6.  GCJ (ECJ) is fine for bytecode
   compilation.
