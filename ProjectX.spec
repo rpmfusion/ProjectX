@@ -3,7 +3,7 @@
 
 Name: ProjectX
 Version: 0.90.4.00
-Release: 8.%cvs%{?dist}
+Release: 9.%cvs%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -35,12 +35,12 @@ BuildArch: noarch
 
 BuildRequires: java-devel >= 1.2.2
 BuildRequires: jakarta-oro
-BuildRequires: commons-net
+BuildRequires: apache-commons-net
 BuildRequires: jpackage-utils
 BuildRequires: desktop-file-utils
 Requires: java >= 1.2.2
 Requires: jakarta-oro
-Requires: commons-net
+Requires: apache-commons-net
 Requires: jpackage-utils
 
 %description
@@ -110,6 +110,10 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %changelog
+* Fri Oct 15 2010 Göran Uddeborg <goeran@uddeborg.se> - 0.90.4.00-9.20100806cvs
+- jakarta-commons-net has been replaced with apache-commons-net.  Requirements
+  updated.
+
 * Fri Oct 15 2010 Nicolas Chauvet <kwizart@gmail.com> - 0.90.4.00-8.20100806cvs
 - Rebuilt for gcc bug
 
