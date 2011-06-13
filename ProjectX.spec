@@ -1,9 +1,8 @@
-%global with_gcj %{!?_without_gcj:1}%{?_without_gcj:0}
 %global cvs 20100806cvs
 
 Name: ProjectX
 Version: 0.90.4.00
-Release: 9.%cvs%{?dist}
+Release: 10.%cvs%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -20,18 +19,11 @@ URL: http://project-x.sourceforge.net/
 # cvs -d:pserver:anonymous@project-x.cvs.sourceforge.net:/cvsroot/project-x login
 Source0: %name-%version-%cvs.tar.xz
 Source1: %name-snapshot.sh
-Source2: projectx
 Patch0: %name-0.90.4.00-20100801cvs.sysjava.patch
 Patch1: %name-0.90.4.00-20100806cvs.desktop.patch
 Patch2: %name-0.90.4.00-20100806cvs.helpfiles.patch
 
-%if %with_gcj
-BuildRequires:    java-gcj-compat-devel >= 1.0.31
-Requires(post):   java-gcj-compat >= 1.0.31
-Requires(postun): java-gcj-compat >= 1.0.31
-%else
 BuildArch: noarch
-%endif
 
 BuildRequires: java-devel >= 1.2.2
 BuildRequires: jakarta-oro
@@ -74,28 +66,8 @@ sh -ex build.sh
 %install
 install -d %buildroot%_javadir %buildroot%_bindir
 cp -p %name.jar %buildroot%_javadir
-%if %with_gcj
-%_bindir/aot-compile-rpm
-%endif
-install %SOURCE2 %buildroot%_bindir
+%jpackage_script net.sourceforge.dvb.projectx.common.Start "" "" ProjectX:commons-net:jakarta-oro projectx true
 desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
-
-
-%post
-%if %with_gcj
-  if [ -x %_bindir/rebuild-gcj-db ] 
-  then
-    %_bindir/rebuild-gcj-db
-  fi
-%endif
-
-%postun
-%if %with_gcj
-  if [ -x %_bindir/rebuild-gcj-db ] 
-  then
-    %_bindir/rebuild-gcj-db
-  fi
-%endif
 
 
 %files
@@ -104,12 +76,14 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 %_bindir/projectx
 %_javadir/%name.jar
 %_datadir/applications/projectx.desktop
-%if %with_gcj
-%_libdir/gcj/%name
-%endif
 
 
 %changelog
+* Mon Jun 13 2011 Göran Uddeborg <goeran@uddeborg.se> - 0.90.4.00-10.20100806cvs
+- Adjust to updated packaging guidelines:
+- + Build wrapper script using the jpackage_script macro.
+- + Remove support for GCJ.
+
 * Fri Oct 15 2010 Göran Uddeborg <goeran@uddeborg.se> - 0.90.4.00-9.20100806cvs
 - jakarta-commons-net has been replaced with apache-commons-net.  Requirements
   updated.

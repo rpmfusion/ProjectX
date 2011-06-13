@@ -1,5 +1,0 @@
-#! /bin/bash
-. /usr/share/java-utils/java-functions
-MAIN_CLASS=net.sourceforge.dvb.projectx.common.Start
-set_classpath ProjectX commons-net jakarta-oro
-run "$@"
