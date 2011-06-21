@@ -1,8 +1,6 @@
-%global cvs 20100806cvs
-
 Name: ProjectX
-Version: 0.90.4.00
-Release: 10.%cvs%{?dist}
+Version: 0.91.0
+Release: 1
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -10,15 +8,7 @@ Group: Applications/Multimedia
 License: GPLv2+
 URL: http://project-x.sourceforge.net/
 
-# A CVS snapshot is used rather than the latest official release, see
-# https://bugzilla.rpmfusion.org/show_bug.cgi?id=985#c6
-#
-# Use the ProjectX-snapshot.sh (source 1) script to reproduce.  Before
-# the first time, do this:
-#
-# cvs -d:pserver:anonymous@project-x.cvs.sourceforge.net:/cvsroot/project-x login
-Source0: %name-%version-%cvs.tar.xz
-Source1: %name-snapshot.sh
+Source: http://downloads.sourceforge.net/project/project-x/project-x/%{name}_%version.00/%{name}_%version.zip
 Patch0: %name-0.90.4.00-20100801cvs.sysjava.patch
 Patch1: %name-0.90.4.00-20100806cvs.desktop.patch
 Patch2: %name-0.90.4.00-20100806cvs.helpfiles.patch
@@ -52,7 +42,7 @@ mottagningen.
 
 
 %prep
-%setup0 -q -n %name-%version-%cvs
+%setup -q -n Project-X_%version
 %patch0
 %patch1
 %patch2
@@ -79,6 +69,10 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %changelog
+* Sun Jun 19 2011 Göran Uddeborg <goeran@uddeborg.se> - 0.91.0
+- New upstreams version.  This is an official release, not a snapshot
+  any more.
+
 * Mon Jun 13 2011 Göran Uddeborg <goeran@uddeborg.se> - 0.90.4.00-10.20100806cvs
 - Adjust to updated packaging guidelines:
 - + Build wrapper script using the jpackage_script macro.
