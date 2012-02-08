@@ -1,6 +1,6 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 1
+Release: 2
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -69,6 +69,9 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %changelog
+* Wed Feb 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.91.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Sun Jun 19 2011 Göran Uddeborg <goeran@uddeborg.se> - 0.91.0
 - New upstreams version.  This is an official release, not a snapshot
   any more.
