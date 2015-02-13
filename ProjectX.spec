@@ -1,6 +1,6 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -8,18 +8,19 @@ Group: Applications/Multimedia
 License: GPLv2+
 URL: http://project-x.sourceforge.net/
 
-Source: http://downloads.sourceforge.net/project/project-x/project-x/%{name}_%version.00/%{name}_%version.zip
+Source0: http://downloads.sourceforge.net/project/project-x/project-x/%{name}_%version.00/%{name}_%version.zip
+Source1: http://gentoo.sbriesen.de/distfiles/projectx-idctfast.tar.xz
 Patch0: %name-0.90.4.00-20100801cvs.sysjava.patch
 Patch1: %name-0.90.4.00-20100806cvs.desktop.patch
 Patch2: %name-0.90.4.00-20100806cvs.helpfiles.patch
-
-BuildArch: noarch
+Patch3: projectx_0.91.0.08_IDCTFast.patch
 
 BuildRequires: java-devel >= 1.2.2
 BuildRequires: jakarta-oro
 BuildRequires: apache-commons-net
 BuildRequires: jpackage-utils
 BuildRequires: desktop-file-utils
+BuildRequires: dos2unix
 Requires: java >= 1.2.2
 Requires: jakarta-oro
 Requires: apache-commons-net
@@ -28,7 +29,7 @@ Requires: jpackage-utils
 %description
 In many countries digital radio and television uses the Digital Video
 Broadcasting (DVB) standard to broadcast its data. Project X is a tool
-to analyse and manipulate these DVB MPEG data streams. It can cut and
+to analyze and manipulate these DVB MPEG data streams. It can cut and
 demultiplex them and it tries its best to handle and repair many
 stream types and show what went wrong on reception.
 
@@ -43,32 +44,58 @@ mottagningen.
 
 %prep
 %setup -q -n Project-X_%version
+# Source 1 unpacks into  a version-less directory.  Unpack it inside the real
+# directory, and move things up.
+%setup -q -n Project-X_%version -T -D -a 1
+mv Project-X/lib/PORTABLE lib
+mv Project-X/src/net/sourceforge/dvb/projectx/video/IDCTFast.java \
+   src/net/sourceforge/dvb/projectx/video
 %patch0
 %patch1
 %patch2
+# Patch 3 uses clean newlines, but the files it patches uses CRLF as distributed.
+# Fix the documentation files similarily.
+dos2unix noguisources.lst sources.lst \
+         src/net/sourceforge/dvb/projectx/video/MpvDecoder.java \
+         Copying ReadMe.txt ReleaseNotes_0.91.0.txt
+%patch3 -p2
 sed -i '/Class-Path/d' MANIFEST.MF
 
 
 %build
 sh -ex build.sh
+make -C lib/PORTABLE PROJECTX_HOME=%_builddir/Project-X_%version \
+            IDCT=idct-mjpeg-mmx \
+            CPLAT="%optflags -fPIC" \
+            CINC="-I%_jvmdir/java/include -I%_jvmdir/java/include/linux"
 
 
 %install
-install -d %buildroot%_javadir %buildroot%_bindir
-cp -p %name.jar %buildroot%_javadir
-%jpackage_script net.sourceforge.dvb.projectx.common.Start "" "" ProjectX:commons-net:jakarta-oro projectx true
+install -d %buildroot%_jnidir %buildroot%_libdir/%name %buildroot%_bindir
+install -p -m u=rw,go=r %name.jar %buildroot%_jnidir
+install -p lib/PORTABLE/libidctfast.so %buildroot%_libdir/%name
+%jpackage_script net.sourceforge.dvb.projectx.common.Start "-Djava.library.path=%_libdir/%name" "" ProjectX:commons-net:jakarta-oro projectx true
 desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %files
-%defattr(-,root,root,-)
-%doc Copying ReadMe.txt
+%license Copying
+%doc ReadMe.txt ReleaseNotes_0.91.0.txt
 %_bindir/projectx
-%_javadir/%name.jar
+%_jnidir/%name.jar
+%_libdir/%name
 %_datadir/applications/projectx.desktop
 
 
 %changelog
+* Fri Feb 13 2015 Göran Uddeborg <goeran@uddeborg.se> - 0.91.0-5
+- Build with fast-math (BZ3499)
+- Separate licence from documentation files
+- Skip obsolete defattr declaration
+- Include the release notes in the documentation
+- Use standard line endings in the documentation and license files
+- Fix some minor lint
+
 * Sat Oct 25 2014 Sérgio Basto <sergio@serjux.com> - 0.91.0-4
 - add %{?dist} tag
 
@@ -124,7 +151,7 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 - Do double line spacing between major sections.
 - Removed cleaning in install and clean sections, no longer needed from F13.
 
-* Mon Dec  6 2009 Göran Uddeborg <goeran@uddeborg.se> 0.90.4.00-3.20091201cvs
+* Mon Dec  7 2009 Göran Uddeborg <goeran@uddeborg.se> 0.90.4.00-3.20091201cvs
 - BuildRequires entries on separate lines
 - Don't point out Europe in the description, DVB is used in more places.
 - Build wrapper script using jpackage-utils.
