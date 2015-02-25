@@ -1,6 +1,6 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -65,7 +65,9 @@ sed -i '/Class-Path/d' MANIFEST.MF
 %build
 sh -ex build.sh
 make -C lib/PORTABLE PROJECTX_HOME=%_builddir/Project-X_%version \
+%ifarch i686 x86_64 ia64
             IDCT=idct-mjpeg-mmx \
+%endif
             CPLAT="%optflags -fPIC" \
             CINC="-I%_jvmdir/java/include -I%_jvmdir/java/include/linux"
 
@@ -88,6 +90,9 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %changelog
+* Wed Feb 25 2015 Göran Uddeborg <goeran@uddeborg.se> - 0.91.0-6
+- Use MMX instructions only on architectures that have them (BZ3549)
+
 * Fri Feb 13 2015 Göran Uddeborg <goeran@uddeborg.se> - 0.91.0-5
 - Build with fast-math (BZ3499)
 - Separate licence from documentation files
