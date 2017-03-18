@@ -1,6 +1,6 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -90,6 +90,9 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 
 
 %changelog
+* Sat Mar 18 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.91.0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Wed Feb 25 2015 Göran Uddeborg <goeran@uddeborg.se> - 0.91.0-6
 - Use MMX instructions only on architectures that have them (BZ3549)
 
