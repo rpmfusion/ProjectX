@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>projectx.desktop</id>
+  <metadata_license>CC-BY-SA-4.0</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <description>
+    <p>
+      In many countries digital radio and television uses the Digital
+      Video Broadcasting (DVB) standard to broadcast its data. Project
+      X is a tool to analyze and manipulate these DVB MPEG data
+      streams. It can cut and demultiplex them and it tries its best
+      to handle and repair many stream types and show what went wrong
+      on reception.
+    </p>
+    <p xml:lang="sv">
+      I många länder använder digital radio och television
+      DVB-standarden (Digital Video Broadcasting) för att sända sina
+      data.  Project X är ett verktyg för att analysera och hantera
+      dessa DVB-MPEG-dataströmmar.  Det kan dela upp och demultiplexa
+      dem och det gör sitt bästa för att hantera och reparera många
+      strömtyper och visa vad som gick fel vid mottagningen.
+    </p>
+  </description>
+  <launchable type="desktop-id">xpenguins.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image width="465" height="262">
+	https://pkgs.rpmfusion.org/cgit/free/ProjectX.git/plain/screenshot.png
+      </image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">http://project-x.sourceforge.net/</url>
+  <update_contact>goeran@uddeborg.se</update_contact>
+</component>

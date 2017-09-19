@@ -1,15 +1,15 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 8%{?dist}
+Release: 9%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
-Group: Applications/Multimedia
 License: GPLv2+
 URL: http://project-x.sourceforge.net/
 
 Source0: http://downloads.sourceforge.net/project/project-x/project-x/%{name}_%version.00/%{name}_%version.zip
 Source1: http://gentoo.sbriesen.de/distfiles/projectx-idctfast.tar.xz
+Source2: projectx.appdata.xml
 Patch0: %name-0.90.4.00-20100801cvs.sysjava.patch
 Patch1: %name-0.90.4.00-20100806cvs.desktop.patch
 Patch2: %name-0.90.4.00-20100806cvs.helpfiles.patch
@@ -21,6 +21,7 @@ BuildRequires: apache-commons-net
 BuildRequires: jpackage-utils
 BuildRequires: desktop-file-utils
 BuildRequires: dos2unix
+BuildRequires: libappstream-glib
 Requires: java >= 1.2.2
 Requires: jakarta-oro
 Requires: apache-commons-net
@@ -78,7 +79,13 @@ install -p -m u=rw,go=r %name.jar %buildroot%_jnidir
 install -p lib/PORTABLE/libidctfast.so %buildroot%_libdir/%name
 %jpackage_script net.sourceforge.dvb.projectx.common.Start "-Djava.library.path=%_libdir/%name" "" ProjectX:commons-net:jakarta-oro projectx true
 desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
+install -d %buildroot%_datadir/metainfo
+cp -p %SOURCE2 %buildroot%_datadir/metainfo
 
+
+%check
+appstream-util validate-relax --nonet \
+	       %buildroot%_datadir/metainfo/projectx.appdata.xml
 
 %files
 %license Copying
@@ -87,9 +94,13 @@ desktop-file-install --dir=%buildroot%_datadir/applications projectx.desktop
 %_jnidir/%name.jar
 %_libdir/%name
 %_datadir/applications/projectx.desktop
+%_datadir/metainfo/projectx.appdata.xml
 
 
 %changelog
+* Tue Sep 19 2017 Göran Uddeborg <goeran@uddeborg.se> 0.91.0-9
+- Appdata added.
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.91.0-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
