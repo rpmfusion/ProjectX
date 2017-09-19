@@ -24,7 +24,7 @@
   <launchable type="desktop-id">xpenguins.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <image width="465" height="262">
+      <image width="864" height="639">
 	https://pkgs.rpmfusion.org/cgit/free/ProjectX.git/plain/screenshot.png
       </image>
     </screenshot>
