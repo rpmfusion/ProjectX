@@ -1,6 +1,6 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 9%{?dist}
+Release: 10%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -98,6 +98,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Wed Feb 28 2018 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.91.0-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Tue Sep 19 2017 Göran Uddeborg <goeran@uddeborg.se> 0.91.0-9
 - Appdata added.
 
