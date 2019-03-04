@@ -15,6 +15,7 @@ Patch1: %name-0.90.4.00-20100806cvs.desktop.patch
 Patch2: %name-0.90.4.00-20100806cvs.helpfiles.patch
 Patch3: projectx_0.91.0.08_IDCTFast.patch
 
+BuildRequires: gcc
 BuildRequires: java-devel >= 1.2.2
 BuildRequires: jakarta-oro
 BuildRequires: apache-commons-net
