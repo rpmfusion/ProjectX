@@ -1,6 +1,6 @@
 Name: ProjectX
 Version: 0.91.0
-Release: 16%{?dist}
+Release: 17%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -99,6 +99,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Thu Sep 10 2020 Leigh Scott <leigh123linux@gmail.com> - 0.91.0-17
+- Fix appdata
+
 * Tue Sep  1 2020 Göran Uddeborg <goeran@uddeborg.se> 0.91.0-16
 - Remove inccorrectly commited source from git.
 
