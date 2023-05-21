@@ -1,6 +1,7 @@
 Name: ProjectX
 Version: 0.91.0
-Release: %autorelease
+# RPM Fusion doesn't support autorelease.
+Release: 22%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
