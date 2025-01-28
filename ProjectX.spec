@@ -1,7 +1,7 @@
 Name: ProjectX
 Version: 0.91.0
 # RPM Fusion doesn't support autorelease.
-Release: 26%{?dist}
+Release: 27%{?dist}
 Summary: DVB video editing and demultiplexing tool
 Summary(sv): Verktyg för redigering och demultiplexning av DVB-video
 
@@ -103,6 +103,9 @@ appstream-util validate-relax --nonet \
 
 # RPM Fusion doesn't support autochangelog.
 %changelog
+* Tue Jan 28 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.91.0-27
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
 * Thu Aug 01 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.91.0-26
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
